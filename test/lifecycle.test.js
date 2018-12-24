@@ -14,7 +14,7 @@ before(function(done) {
     // and disable all logs except errors and warnings:
     hooks: { grunt: false },
     log: { level: 'warn' },
-
+    models: { migrate: 'drop' }
   }, function(err) {
     if (err) { return done(err); }
 
