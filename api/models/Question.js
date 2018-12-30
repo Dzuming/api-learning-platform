@@ -12,6 +12,11 @@ module.exports = {
     isHidden: {
       type: 'boolean',
       defaultsTo: false
+    },
+    tags:{
+      collection: 'tag',
+      via: 'question',
+      through: 'questiontag'
     }
   }
 };

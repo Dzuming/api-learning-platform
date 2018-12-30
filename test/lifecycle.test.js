@@ -1,5 +1,10 @@
 var sails = require('sails');
 
+afterEach((done) => {
+  Object.keys(sails.models).map(async key => await sails.models[key].destroy({}));
+  return done();
+})
+
 // Before running any tests...
 before(function(done) {
 
