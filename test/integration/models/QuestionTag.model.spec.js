@@ -11,7 +11,6 @@ describe('QuestionTag (model)', () => {
   var description = faker.lorem.paragraphs();
 
   beforeEach(async () => {
-    console.log({test: await Question.find().populate('tags')})
     await Tag.create({ id: 1, name });
     await Question.create({ id: 1, title, description });
     await Question.addToCollection(1, 'tags', 1);

@@ -1,10 +1,5 @@
 var sails = require('sails');
 
-afterEach((done) => {
-  Object.keys(sails.models).map(async key => await sails.models[key].destroy({}));
-  return done();
-})
-
 // Before running any tests...
 before(function(done) {
 
@@ -28,6 +23,18 @@ before(function(done) {
 
     return done();
   });
+});
+
+afterEach((done) => {
+  Object.keys(sails.models).map(async key => {
+    try {
+      await sails.models[key].destroy({})
+    } catch (err) {
+      console.log(err)
+    }
+
+  });
+  return done();
 });
 
 // After all tests have finished...
