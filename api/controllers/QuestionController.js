@@ -19,7 +19,7 @@ module.exports = {
       return res.status(200).send(latestQuestion)
     } catch (err) {
       res.status(500).send(err)
-    };
+    }
   }
 
 };

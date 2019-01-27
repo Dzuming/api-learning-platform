@@ -21,6 +21,8 @@ module.exports.routes = {
 
   'GET /questions': 'QuestionController.getQuestions',
   'POST /questions': 'QuestionController.postQuestion',
+  'GET /tags': 'TagController.getTags',
+  'POST /tags': 'TagController.postTag',
 
 
   /***************************************************************************

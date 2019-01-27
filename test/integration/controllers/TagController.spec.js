@@ -6,34 +6,33 @@ var expect = chai.expect;
 chai.use(require('chai-like'));
 chai.use(require('chai-things')); // Don't swap these two
 
-describe('QuestionController', function() {
-  var title = faker.lorem.sentence();
-  var description = faker.lorem.paragraphs();
+describe('TagController', function() {
+  var name = faker.lorem.sentence();
   beforeEach(done => {
-    return Question.create({ title, description  }).then(done());
+    return Tag.create({ name }).then(done());
   });
-  describe('#getQuestions()', function() {
+  describe('#getTags()', function() {
     it('should get all questions', function (done) {
       supertest(sails.hooks.http.app)
-        .get('/questions')
+        .get('/tags')
         .expect(200)
         .then(response => {
           expect(response.body)
             .to.be.an('array')
-            .that.contains.something.like({title, description, isHidden: false});
+            .that.contains.something.like({name});
           done();
         })
     });
   });
-  describe('#postQuestion()', function() {
-    it('should create question', function (done) {
+  describe('#postTag()', function() {
+    it('should create tag', function (done) {
       supertest(sails.hooks.http.app)
-        .post('/questions')
-        .send({title, description})
+        .post('/tags')
+        .send({name})
         .expect(200)
         .then(response => {
           expect(response.body)
-            .include({title, description, isHidden: false});
+            .include({name});
           done();
         })
     });
