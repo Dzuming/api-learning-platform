@@ -7,12 +7,12 @@ chai.use(require('chai-like'));
 chai.use(require('chai-things')); // Don't swap these two
 
 describe('QuestionController.getQuestions', function() {
+  var title = faker.lorem.sentence();
+  var description = faker.lorem.paragraphs();
+  beforeEach(done => {
+    return Question.create({ title, description  }).then(done());
+  });
   describe('#getQuestions()', function() {
-    var title = faker.lorem.sentence();
-    var description = faker.lorem.paragraphs();
-    beforeEach(done => {
-      return Question.create({ title, description  }).then(done());
-    });
     it('should get all questions', function (done) {
       supertest(sails.hooks.http.app)
         .get('/questions')
@@ -25,5 +25,17 @@ describe('QuestionController.getQuestions', function() {
         })
     });
   });
-
+  describe('#postQuestion()', function() {
+    it('should create question', function (done) {
+      supertest(sails.hooks.http.app)
+        .post('/questions')
+        .send({title, description})
+        .expect(200)
+        .then(response => {
+          expect(response.body)
+            .include({title, description, isHidden: false});
+          done();
+        })
+    });
+  });
 });

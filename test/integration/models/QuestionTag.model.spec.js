@@ -19,7 +19,6 @@ describe('QuestionTag (model)', () => {
     it('should get all QuestionTag', done => {
       Question.find().populate('tags')
         .then(questions => {
-          console.log(questions)
           expect(questions)
             .to.be.an('array')
             .that.contains.something.like({

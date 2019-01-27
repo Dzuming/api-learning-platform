@@ -20,6 +20,7 @@ module.exports.routes = {
   ***************************************************************************/
 
   'GET /questions': 'QuestionController.getQuestions',
+  'POST /questions': 'QuestionController.postQuestion',
 
 
   /***************************************************************************
