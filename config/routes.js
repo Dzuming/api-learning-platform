@@ -21,6 +21,7 @@ module.exports.routes = {
 
   'GET /questions': 'QuestionController.getQuestions',
   'POST /questions': 'QuestionController.postQuestion',
+  'PUT /questions/:id': 'QuestionController.editQuestion',
   'GET /tags': 'TagController.getTags',
   'POST /tags': 'TagController.postTag',
 

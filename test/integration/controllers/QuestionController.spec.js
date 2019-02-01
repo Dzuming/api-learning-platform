@@ -38,4 +38,25 @@ describe('QuestionController', function() {
         })
     });
   });
+  describe('#EditQuestion()', function() {
+    const id = 444;
+    beforeEach(done => {
+      return Question.create({ id, title, description  }).then(done());
+    });
+    it('should edit question',  function  (done) {
+      const newTitle = faker.lorem.sentence();
+      const newDescription = faker.lorem.paragraphs();
+
+      supertest(sails.hooks.http.app)
+        .put(`/questions/${id}`)
+        .send({title: newTitle, description: newDescription})
+        .expect(200)
+        .then(response => {
+          expect(response.body)
+            .to.be.an('array')
+            .that.contains.something.like({title: newTitle, description: newDescription, isHidden: false});
+          done();
+        })
+    });
+  });
 });

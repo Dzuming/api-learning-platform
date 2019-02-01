@@ -20,7 +20,15 @@ module.exports = {
     } catch (err) {
       res.status(500).send(err)
     }
+  },
+  editQuestion:  async (req, res) => {
+    try {
+      const updateQuestion =  Question.update({ id: req.params.id  }).set({title: req.body.title, description: req.body.description});
+      const latestQuestion = await updateQuestion.fetch();
+      return res.status(200).send(latestQuestion)
+    } catch (err) {
+      res.status(500).send(err)
+    }
   }
-
 };
 
