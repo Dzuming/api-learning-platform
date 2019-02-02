@@ -37,4 +37,23 @@ describe('TagController', function() {
         })
     });
   });
+  describe('#EditTag()', function() {
+    const id = 333;
+    beforeEach(done => {
+      return Tag.create({ id, name }).then(done());
+    });
+    it('should edit tag',  function  (done) {
+      const newName = faker.lorem.sentence();
+      supertest(sails.hooks.http.app)
+        .put(`/tags/${id}`)
+        .send({name: newName})
+        .expect(200)
+        .then(response => {
+          expect(response.body)
+            .to.be.an('array')
+            .that.contains.something.like({name: newName});
+          done();
+        })
+    });
+  });
 });

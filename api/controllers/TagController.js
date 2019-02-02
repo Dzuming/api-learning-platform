@@ -20,6 +20,15 @@ module.exports = {
     } catch (err) {
       res.status(500).send(err)
     }
+  },
+  editTag:  async (req, res) => {
+    try {
+      const updateTag =  Tag.update({ id: req.params.id  }).set({name: req.body.name});
+      const latestTag = await updateTag.fetch();
+      return res.status(200).send(latestTag)
+    } catch (err) {
+      res.status(500).send(err)
+    }
   }
 };
 
