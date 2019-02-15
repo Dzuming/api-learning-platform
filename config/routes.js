@@ -25,6 +25,7 @@ module.exports.routes = {
   'GET /tags': 'TagController.getTags',
   'POST /tags': 'TagController.postTag',
   'PUT /tags/:id': 'TagController.editTag',
+  'POST /login': 'AuthenticationController.login',
 
 
   /***************************************************************************
