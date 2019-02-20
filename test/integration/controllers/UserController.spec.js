@@ -10,7 +10,10 @@ describe('UserController', () => {
   const name = faker.lorem.sentence();
   const email = faker.internet.email();
   const password = faker.internet.password();
+  before(function (done) {
 
+    done()
+  });
   it('should create account', function (done) {
     supertest(sails.hooks.http.app)
       .post('/user')
