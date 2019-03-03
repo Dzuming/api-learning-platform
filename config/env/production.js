@@ -31,21 +31,9 @@ module.exports = {
   **************************************************************************/
   datastores: {
 
-    /***************************************************************************
-    *                                                                          *
-    * Configure your default production database.                              *
-    *                                                                          *
-    * 1. Choose an adapter:                                                    *
-    *    https://sailsjs.com/plugins/databases                                 *
-    *                                                                          *
-    * 2. Install it as a dependency of your Sails app.                         *
-    *    (For example:  npm install sails-mysql --save)                        *
-    *                                                                          *
-    * 3. Then set it here (`adapter`), along with a connection URL (`url`)     *
-    *    and any other, adapter-specific customizations.                       *
-    *    (See https://sailsjs.com/config/datastores for help.)                 *
-    *                                                                          *
-    ***************************************************************************/
+    adapter: require('sails-mysql'),
+    url: 'mysql://b7632ecfab885b:d25cd277@eu-cdbr-west-02.cleardb.net/heroku_291ffb03480feaf?reconnect=true',
+
     default: {
       // adapter: 'sails-mysql',
       // url: 'mysql://user:password@host:port/database',
@@ -250,10 +238,10 @@ module.exports = {
     * > Be sure to use the right protocol!  ("http://" vs. "https://")         *
     *                                                                          *
     ***************************************************************************/
-    // onlyAllowOrigins: [
-    //   'https://example.com',
-    //   'https://staging.example.com',
-    // ],
+    onlyAllowOrigins: [
+      'https://example.com',
+      'https://staging.example.com',
+    ],
 
 
     /***************************************************************************
