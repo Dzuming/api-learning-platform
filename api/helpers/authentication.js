@@ -50,7 +50,7 @@ module.exports = {
           });
         } else {
           //token expired in 1 day
-          const token = jwt.sign(user[0], sails.config.secret, {expiresIn: 60 * 60 * 24});
+          const token = jwt.sign(user[0], sails.config.custom.secret, {expiresIn: 60 * 60 * 24});
           // Set persistent cookie
           req.session.cookie.token = token;
           res.send({

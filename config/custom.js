@@ -18,6 +18,7 @@ module.exports.custom = {
   mailgunDomain: 'sandboxb57f0789912a4ce2ab6698df7a8b38cf.mailgun.org',
   mailgunSecret: 'f33910177e7c8050a60e42ead8974242-9ce9335e-c1cad4bb',
   mailgunFrom:'dawidpoliszak@op.pl',
+  secret: 'mySecret'
   // stripeSecret: 'sk_test_Zzd814nldl91104qor5911gjald',
   // …
 
