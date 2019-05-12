@@ -25,7 +25,6 @@ module.exports = {
 
 
   fn: async function (inputs, exits) {
-    console.log('hmm');
     mailgun.messages().send(inputs.options, (error, body) => {
       if(error){
         return exits.error(error);
