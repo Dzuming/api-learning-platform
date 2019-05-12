@@ -123,11 +123,10 @@ nbproject
 .node_history
 dump.rdb
 
+
 npm-debug.log
 lib-cov
 *.seed
 *.log
 *.out
 *.pid
-
-/config/env/development.js
