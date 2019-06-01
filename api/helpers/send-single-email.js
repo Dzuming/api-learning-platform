@@ -1,4 +1,5 @@
-var mailgun = require('mailgun-js')({apiKey: sails.config.custom.mailgunSecret, domain: sails.config.custom.mailgunDomain});
+const nodemailer =  require("nodemailer");
+
 module.exports = {
 
 
@@ -25,13 +26,21 @@ module.exports = {
 
 
   fn: async function (inputs, exits) {
-    mailgun.messages().send(inputs.options, (error, body) => {
-      if(error){
-        return exits.error(error);
-      }
-
-      // All done.
-      return exits.success(body);
-    });
+    // create reusable transporter object using the default SMTP transport
+    try {
+      let transporter = nodemailer.createTransport({
+        host: sails.config.custom.nodemailHost,
+        port: 465,
+        secure: true, // true for 465, false for other ports
+        auth: {
+          user: sails.config.custom.nodemailUser,
+          pass: sails.config.custom.nodemailPassword
+        }
+      });
+      let info = await transporter.sendMail(inputs.options);
+      return exits.success(info)
+    } catch (e) {
+      return exits.error(e)
+    }
   }
 };

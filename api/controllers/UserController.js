@@ -10,8 +10,8 @@ module.exports = {
     try {
       await User.create({ name: req.body.name, email: req.body.email, password: req.body.password  });
       await sails.helpers.sendSingleEmail({
-        to:'dawidpoliszak@op.pl',
-        from: sails.config.custom.mailgunFrom,
+        to: req.body.email,
+        from: sails.config.custom.nodemailFrom,
         subject:'Subject',
         text:'Your message'
       });
