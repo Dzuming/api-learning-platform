@@ -1,4 +1,4 @@
-const nodemailer =  require("nodemailer");
+const nodemailer =  require('nodemailer');
 
 module.exports = {
 
@@ -38,9 +38,9 @@ module.exports = {
         }
       });
       let info = await transporter.sendMail(inputs.options);
-      return exits.success(info)
+      return exits.success(info);
     } catch (e) {
-      return exits.error(e)
+      return exits.error(e);
     }
   }
 };
