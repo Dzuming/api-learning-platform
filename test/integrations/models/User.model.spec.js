@@ -1,31 +1,33 @@
-require('mocha-sinon');
-const chai = require('chai');
-const faker = require('faker');
-const supertest = require('supertest');
-const expect = chai.expect;
+var chai = require('chai');
+var expect = chai.expect;
+var faker = require('faker');
+
 chai.use(require('chai-like'));
 chai.use(require('chai-things')); // Don't swap these two
 
-describe('UserController', () => {
+describe('User (model)', () => {
   const name = faker.lorem.sentence();
   const email = faker.internet.email();
   const password = faker.internet.password();
-  beforeEach(function (done) {
-    const sendSingleEmail = require('../../../api/helpers/send-single-email');
-    const mockedSendSingleEmailFunction = async function(inputs, exits){
-      return exits.success(true);
-    };
-    this.sinon.stub(sendSingleEmail, 'fn').callsFake(mockedSendSingleEmailFunction);
-    done();
+  beforeEach(done => {
+    return User.create({ name, email, password }).fetch().then(done());
   });
-  it('should create account', (done) => {
-    supertest(sails.hooks.http.app)
-      .post('/user')
-      .send({name, email, password})
-      .expect(200)
-      .then(response => {
-        expect(response.body.success).to.equal(true);
-        done();
-      });
+  describe('get all users', () => {
+    it('should get users', done => {
+      User.find().populate('activationCodes')
+        .then(users => {
+          expect(users)
+            .to.be.an('array')
+            .that.contains.something.like({
+              name,
+              email,
+              isDeleted: false,
+              isActive: false,
+            });
+          expect(users[0].activationCodes).to.have.lengthOf(1)
+          done();
+        })
+        .catch(done);
+    });
   });
 });

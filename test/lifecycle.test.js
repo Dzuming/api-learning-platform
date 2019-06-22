@@ -26,17 +26,17 @@ before(function(done) {
   });
 });
 
-// afterEach((done) => {
-//   Object.keys(sails.models).map(async key => {
-//     try {
-//       await sails.models[key].datastore.destroy({});
-//     } catch (err) {
-//       console.log(err);
-//     }
-//
-//   });
-//   return done();
-// });
+afterEach((done) => {
+  Object.keys(sails.models).map(async key => {
+    try {
+      await sails.models[key].destroy({})
+    } catch (err) {
+      console.log(err)
+    }
+
+  });
+  return done();
+});
 
 // After all tests have finished...
 after(done => {

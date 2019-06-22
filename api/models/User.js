@@ -27,8 +27,17 @@ module.exports = {
       type: 'BOOLEAN',
       defaultsTo: false
     },
+    isActive: {
+      type: 'BOOLEAN',
+      defaultsTo: false
+    },
+    activationCodes:{
+      collection: 'useractivation',
+      via: 'user',
+    }
   },
   beforeCreate: function (user, cb) {
+    //TODO move it into helpers
     bcrypt.genSalt(10, (err, salt) => {
       if(err) {
         return;
@@ -39,8 +48,12 @@ module.exports = {
           return;
         }
         user.password = hash;
+
         cb(null, user);
       });
     });
+  },
+  afterCreate: async function (user, cb) {
+    await UserActivation.create({user: user.id, code: await sails.helpers.uuid()})
   }
 };
