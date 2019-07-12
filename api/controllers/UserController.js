@@ -11,9 +11,9 @@ module.exports = {
       await User.create({ name: req.body.name, email: req.body.email, password: req.body.password  });
       await sails.helpers.sendSingleEmail({
         to: req.body.email,
-        from: sails.config.custom.nodemailFrom,
+        from: sails.config.custom.nodemail.from,
         subject:'Subject',
-        text:'Your message'
+        html:'Your message'
       });
       return res.status(200).send({success: true});
     } catch (err) {

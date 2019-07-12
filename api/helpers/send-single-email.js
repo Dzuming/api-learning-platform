@@ -1,5 +1,5 @@
 const nodemailer =  require('nodemailer');
-
+const cleanDeep = require('clean-deep');
 module.exports = {
 
 
@@ -27,16 +27,18 @@ module.exports = {
 
   fn: async function (inputs, exits) {
     // create reusable transporter object using the default SMTP transport
+    const params = {
+      host: sails.config.custom.nodemail.host,
+      port: sails.config.custom.nodemail.port,
+      ignoreTLS: sails.config.custom.nodemail.ignoreTLS,
+      secure: sails.config.custom.nodemail.secure, // true for 465, false for other ports
+      auth: {
+        user: sails.config.custom.nodemail.user,
+        pass: sails.config.custom.nodemail.password
+      }
+    };
     try {
-      let transporter = nodemailer.createTransport({
-        host: sails.config.custom.nodemailHost,
-        port: 465,
-        secure: true, // true for 465, false for other ports
-        auth: {
-          user: sails.config.custom.nodemailUser,
-          pass: sails.config.custom.nodemailPassword
-        }
-      });
+      let transporter = nodemailer.createTransport(cleanDeep(params));
       let info = await transporter.sendMail(inputs.options);
       return exits.success(info);
     } catch (e) {
