@@ -55,5 +55,6 @@ module.exports = {
   },
   afterCreate: async function (user, cb) {
     await UserActivation.create({user: user.id, code: await sails.helpers.uuid()})
+    cb(null, user);
   }
 };
